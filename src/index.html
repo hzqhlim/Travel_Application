@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Mexico Weather</title>
+
+    <style>
+
+/*mekap dropdown*/
+.drop {
+  margin: 0;
+}
+nav {
+  background-color: black;
+}
+nav ul {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+nav ul li {
+  background-color: black;
+  position: relative;
+  list-style: none;
+  display: inline-block;
+}
+nav ul li a {
+  display: block;
+  padding: 3px 15px;
+  color: aliceblue;
+  text-decoration: none;
+  line-height: 40px;
+  font-size: 17px;
+}
+nav ul li a:hover {
+  background-color: rgb(93, 93, 93);
+  text-decoration: none;
+  color: white;
+}
+
+.mySlides {
+  display: none;
+}
+.gamaq img {
+  vertical-align: middle;
+}
+/* Slideshow container */
+.slideshow-container {
+  max-width: 100%;
+  position: relative;
+  margin: auto;
+  background-color: black;
+}
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+.active {
+  background-color: #717171;
+}
+
+.input {
+  background-color: black;
+  color: white;
+}
+
+select {
+  width: 500px;
+  margin: 3px 0;
+  padding: 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+select:hover {
+  opacity: 90%;
+}
+
+input {
+  width: 80px;
+  margin: 3px 0;
+  padding: 8px;
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: rgb(186, 99, 117);
+  cursor: pointer;
+}
+input:hover {
+  opacity: 90%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+   width: 100%;
+  height: 100vh;
+  font-family: 'DM-sans', sans-serif;
+}
+
+.header {
+  font-size: 24px;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  border-radius: 4px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 60px;
+  padding: 0 30px;
+}
+
+.wrapper {
+  width: 33.3%;
+  height: 100%;
+  padding: 10px;
+}
+
+.box {
+  position: relative;
+  max-height: 300px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1.4px 1.7px rgba(0, 0, 0, 0.017), 0 3.3px 4px rgba(0, 0, 0, 0.024), 0 6.3px 7.5px rgba(0, 0, 0, 0.03), 0 11.2px 13.4px rgba(0, 0, 0, 0.036), 0 20.9px 25.1px rgba(0, 0, 0, 0.043), 0 50px 60px rgba(0, 0, 0, 0.06);
+}
+
+.box .hide {
+  opacity: 0;
+}
+
+.box .frame {
+  position: absolute;
+  border: 1px solid #fff;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.box h2,
+.box p {
+  position: absolute;
+  color: #fff;
+  z-index: 2;
+  width: 100%;
+  transition: opacity 0.2s, transform 0.3s;
+  text-decoration: none;
+}
+
+.box h2 {
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 0;
+  letter-spacing: 1px;
+}
+
+.box p {
+  bottom: 0;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: white;
+}
+
+.box img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all .3s ease-in-out;
+}
+
+
+.blury-card .frame {
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  opacity: 0;
+  transition: all .3s ease-in-out;
+}
+
+.blury-card h2,
+.blury-card p {
+  text-align: center;
+  top: 50%;
+  transform: translatey(-50%);
+  margin: 0;
+  z-index: 3;
+  text-decoration: none;
+  color: white;
+}
+
+.blury-card p {
+  transform: translatey(30px);
+  letter-spacing: 3px;
+  text-decoration: none;
+  color: white;
+}
+
+.blury-card span {
+  font-size: 24px;
+}
+
+.blury-card img {
+  z-index: 2;
+}
+
+.vintage h2 {
+  top: 30%;
+  transform: translate3d(0, 60px, 0);
+  text-align: center; 
+}
+
+.vintage p {
+  opacity: 0;
+  bottom: 0;
+  transform: translate3d(0, -10px, 0);
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+
+.vintage:before {
+  content:'';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(72,76,97,0) 0%, rgba(72,76,97,0.8) 75%);
+  z-index: 2;
+  bottom: -100%;
+  left: 0;
+}
+
+.vintage:hover:before {
+  bottom: 0;
+}
+
+.vintage:hover h2 {
+  bottom: 40px;
+  transform: translate3d(0, 20px, 0);
+}
+
+.vintage:hover p {
+  opacity: 1;
+  transform: translate3d(0, -30px, 0);
+  text-decoration: none;
+  color: white;
+}
+
+.zoom-out .frame {
+  width: calc(100% - 100px);
+  height: calc(100% - 100px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+}
+
+.zoom-out h2 { 
+  font-size: 20px; 
+  font-weight: 300; 
+  margin-left: 10px;
+  letter-spacing: 1px;
+}
+
+.zoom-out span {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.zoom-out p {
+  max-width: 120px;
+  text-align: right;
+  margin: 10px;
+  right: 0;
+  text-decoration: none;
+  color: white;
+}
+
+.zoom-out img {
+  transform: scale(1.1);
+}
+
+
+@media screen and (max-width: 880px) {
+  .wrapper {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .wrapper {
+    width: 100%;
+  }
+}
+
+.footer-basic {
+  padding:40px 0;
+  margin-bottom: -15%;
+  background-color:#ffffff;
+  color:#4b4c4d;
+}
+
+.footer-basic ul {
+  padding:0;
+  list-style:none;
+  text-align:center;
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:0;
+}
+
+.footer-basic li {
+  padding:0 10px;
+}
+
+.footer-basic ul a {
+  color:inherit;
+  text-decoration:none;
+  opacity:0.8;
+}
+
+.footer-basic ul a:hover {
+  opacity:1;
+}
+
+.footer-basic .social {
+  text-align:center;
+  padding-bottom:25px;
+}
+
+.footer-basic .social > a {
+  font-size:24px;
+  width:40px;
+  height:40px;
+  line-height:40px;
+  display:inline-block;
+  text-align:center;
+  border-radius:50%;
+  border:1px solid #ccc;
+  margin:0 8px;
+  color:inherit;
+  opacity:0.75;
+}
+
+.footer-basic .social > a:hover {
+  opacity:0.9;
+}
+
+.footer-basic .copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:0;
+}
+
+
+    </style>
+</head>
+<body>
+<!----------------------------------------------------------------------------------------------------------------------------------Nav Bar--------->
+    <div class="drop">
+      <nav>
+          <ul>
+              <li style="border-bottom: 3px solid white ;"><a href="index.html">HOME</a></li>
+              <li><a href="meal.html">MEALS</a></li>
+          </ul>
+      </nav>
+    </div>
+
+    <script src="functions.js"></script>
+
+<!----------------------------------------------------------------------------------------------------------------------------Slide Show------------>
+    <div class="slideshow-container">
+
+      <div class="mySlides">
+        <div class="numbertext">1 / 3</div>
+        <div class="gamaq"><img src="slide2.jpg" width="100%" height="400"></div>
+      </div>
+      
+      <div class="mySlides">
+        <div class="numbertext">2 / 3</div>
+        <div class="gamaq"><img src="slide3.jpg" width="100%" height="400"></div>
+      </div>
+      
+      <div class="mySlides">
+        <div class="numbertext">3 / 3</div>
+        <div class="gamaq"><img src="slide1.jpg" width="100%" height="400"></div>
+      </div>
+      
+      <br>
+      
+      <div style="text-align:center; background-color: black;">
+        <span class="dot"></span> 
+        <span class="dot"></span> 
+        <span class="dot"></span> 
+      </div>
+
+    </div>
+
+    <script>
+      let slideIndex = 0;
+      showSlides();
+      
+      function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}    
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 3000); // Change image every 3 seconds
+      }
+    </script>
+
+<!--------------------------------------------------------------------------------------------------------------------------------User Input--------->
+
+    <div class="input"><br/><br/>
+      <center>
+        <main>
+            <p style="font-size: 20px;">Select A City To Know About Their Weather</p>
+            <form method="POST" id="weatherForm">
+              <select name="pilih" id="citySelect">
+                <option value="">Select City</option>
+                  <option value="cancun">Cancun</option>
+                  <option value="san miguel de allende">San Miguel de Allende</option>
+                  <option value="mexico city">Mexico City</option>
+                  <option value="puerto vallarta">Puerto Vallarta</option>               
+                  <option value="playa del carmen">Playa del Carmen</option>
+              </select>
+                <input id="postSubmit" type="submit" value="Submit" />
+            </form>
+            <br>
+        </main>
+      </center>
+      <br/>
+    </div>
+
+<!---------------------------------------------------------------------------------------------------------------------------------Cancun------------->
+
+  <div class="container">
+
+    <div class="cancun">
+    <p class="header">Famous Places to visit in Cancun</p>
+    
+    <div class="content">
+       <div class="wrapper">
+        <div class="box vintage">
+          <img src="Isla-cancun.jpg" >
+          <h2>Isla Mujeres</h2>
+          <p><a href="https://isla-mujeres.net/" style="text-decoration: none; color: white;">
+            The white sands are replaced by turquoise <br>water, warm and perfect for a swim. 
+            Don’t miss your chance to explore Cancun’s best-kept secret!</p></a>
+        </div>
+       </div>
+  
+       <div class="wrapper">
+        <div class="box vintage">
+          <img src="museo-cancun.png" >
+          <h2>Museo Subacuático del Arte</h2>
+          <p><a href="https://musamexico.org/" style="text-decoration: none; color: white; cursor: pointer;">
+            For those who want to get up close to the sculptures themselves, then try scuba diving or snorkelling. 
+            It’ll give you a totally different perspective!</p></a>
+        </div>
+       </div>
+
+       <div class="wrapper">
+        <div class="box vintage">
+          <img src="Xcaret-cancun.jpg" >
+          <h2>Xcaret Park</h2>
+          <p><a href="https://www.xcaret.com/" style="text-decoration: none; color: white; cursor: pointer;">
+            There are more than 40 attractions set <br>across this 250 acre park, 
+            so you’re sure to find something cool and interesting for you and your family.</p></a>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <div class="box vintage">
+          <img src="coco-cancun.png" >
+          <h2>Coco Bongo</h2>
+          <p><a href="https://www.cocobongo.com/" style="text-decoration: none; color: white; cursor: pointer;">
+            A great place to visit in Cancun at night.<br>
+            You’ll have your own waiter service and a lot more room to manoeuvre, while still getting to enjoy the epic shows!</p></a>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <div class="box vintage">
+          <img src="shopping-cancun.jpg" >
+          <h2>La Isla Shopping Village</h2>
+          <p><a href="https://cancuntriptips.com/cancun/plaza-la-isla-in-cancun/" style="text-decoration: none; color: white; cursor: pointer;">
+            Whatever you want to buy, you’ll find it here. 
+            La Isla is a mixture of Mexican chain stores, souvenir shops, and some well-known global retailers. </p></a>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <div class="box vintage">
+          <img src="chichen-cancun.jpg" >
+          <h2>Chichén Itzá</h2>
+          <p><a href="https://www.chichenitza.com/" style="text-decoration: none; color: white; cursor: pointer;">
+            If you can stand being part of such a huge<br>crowd, the spring and autumn equinoxes are great times to visit!</p></a>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+<!----------------------------------------------------------------------------------------------------------------------San Miguel de Alende-------->
+    
+    <div class="container">
+
+      <div class="san miguel de allende">
+      <p class="header">Famous Places to visit in San Miguel de Alende</p>
+      
+      <div class="content">
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="parroq-san.jpg" >
+            <h2>Parroquia de San Miguel Arcangel</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.lonelyplanet.com/mexico/northern-central-highlands/san-miguel-de-allende/attractions/parroquia-de-san-miguel-arcangel/a/poi-sig/465248/361572">
+              This church is characterized by
+              its pink exterior and wedding cake towers designed by indigenous stone mason Zeferino Gutierrez.</p></a>
+          </div>
+        </div>
+    
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="charco-san.png" >
+            <h2>El Charco del Ingenio</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://isla-mujeres.net/">
+              While it’s labeled as a botanical garden, 
+              it is better described as a nature preserve with a large collection of cactus and other native plants.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="finca-san.jpg" >
+            <h2>Finca la Devoción</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://elcharco.org.mx/en/">
+              Among the beautiful grounds, this property includes an event space, a boutique hotel and thermal water pool, 
+              and a mezcal tasting bar featuring El Tinieblo.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="gruta-san.jpg" >
+            <h2>La Gruta Hot Springs</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://mexicotravel.blog/la-gruta-spa-hot-springs-san-miguel-de-allende/">
+              On the thermal waters at La Gruta Spa include several pools and a steamy cave (gruta) 
+              of warmer water that visitors can access by swimming through a picturesque tunnel.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="templo-san.jpg" >
+            <h2>Templo de San Francisco</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://en.travelbymexico.com/sanmigueldeallende/places-to-visit/?nom=ksmasanfrancisco">
+              a neoclassical church that features carved stone figures and a churrigueresque facade. 
+              Built in the early 18th century, this was part of a Franciscan monastery complex.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="atotonilco-san.jpg" >
+            <h2>The Sanctuary of Atotonilco</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://sandinmysuitcase.com/sanctuary-of-atotonilco/">
+              This church is regularly referred to as the “Sistine Chapel of Mexico” 
+              because of the intricate murals that adorn the interior archways, walls, and ceiling.</p></a>
+          </div>
+        </div>
+      </div>
+      </div>
+<!--------------------------------------------------------------------------------------------------------------------------Mexico City------------->
+
+    <div class="container">
+
+      <div class="mexico city">
+      <p class="header">Famous Places to visit in Mexico City</p>
+      
+      <div class="content">
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="museum-city.jpg" >
+            <h2>The National Museum of Anthropology</h2>
+            <p style="margin-bottom: -5%;"><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Attraction_Review-g150800-d153711-Reviews-Museo_Nacional_de_Antropologia-Mexico_City_Central_Mexico_and_Gulf_Coast.html">
+              The National Museum of Anthropology lies in 
+              Chapultepec Park and is hard to miss due to the huge monolithic figure marking its entrance.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="palace-city.png" >
+            <h2>The National Palace</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Attraction_Review-g150800-d152461-Reviews-National_Palace-Mexico_City_Central_Mexico_and_Gulf_Coast.html">
+              Don't miss The History of Mexico mural by Diego Rivera, 
+              which adorns the grand staircase.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="pyramid-city.jpg" >
+            <h2 style="margin-top: -10%;">Templo Mayor and the Great Pyramid of Tenochtitlán</h2>
+            <p style="margin-bottom: -5%;"><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/ShowUserReviews-g150800-d152191-r631774781-Museo_del_Templo_Mayor-Mexico_City_Central_Mexico_and_Gulf_Coast.html">
+              A highlight of a visit is a walkway past the precinct of the aristocratic "winged warriors," 
+              where remains of residences decorated with multi-colored reliefs have been unearthed, along with evidence of the original paintwork.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="tiles-city.jpg" >
+            <h2>The House of Tiles</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Attraction_Review-g150800-d155947-Reviews-House_of_Tiles_Casa_de_los_Azulejos-Mexico_City_Central_Mexico_and_Gulf_Coast.html">
+              The House of Tiles is now a restaurant and an evocative venue to dine al fresco in the building's spectacular courtyard,
+              surrounded by what is one very large work of art.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="zicola-city.jpg" >
+            <h2>Zócalo</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com.my/Attraction_Review-g150800-d152460-Reviews-Zocalo-Mexico_City_Central_Mexico_and_Gulf_Coast.html">
+              The beating heart of Mexico City is Zócalo - the Plaza de la Constitución (Constitution Square) - where the country's 
+              first constitution was proclaimed in 1813. Entry is free.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="art-city.jpg" >
+            <h2>The Palace of Fine Arts</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Attraction_Review-g150800-d153969-Reviews-Palacio_de_Bellas_Artes-Mexico_City_Central_Mexico_and_Gulf_Coast.html">
+              If you're able to see a performance here, 
+              you'll also be rewarded with a chance to enjoy the theater's stunning interior décor,.</p></a>
+          </div>
+        </div>
+      </div>
+      </div>
+<!-----------------------------------------------------------------------------------------------------------------------Puerto Vallarta-------------->
+
+    <div class="container">
+
+      <div class="puerto vallarta">
+      <p class="header">Famous Places to visit in Puerto Vallarta</p>
+      
+      <div class="content">
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="jungle-puerto.png" >
+            <h2>The Jungle</h2>
+            <p style="margin-bottom: -5%;"><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.puertovallartatours.net/jungle-tours.htm">
+              This lush oasis is home to miles of hiking trails, stunning waterfalls, and exotic wildlife. 
+              It’s the perfect place for nature lovers and adventure seekers alike.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="lady-puerto.jpeg" >
+            <h2 style="margin-top: -5%;">The Cathedral of Our Lady of Guadalupe</h2>
+            <p style="margin-bottom: -5%;"><a style="text-decoration: none; color: white; cursor: pointer;" href="https://en.wikipedia.org/wiki/Basilica_of_Our_Lady_of_Guadalupe">
+              Even if you’re not religious, the cathedral is an awe-inspiring sight. 
+              The cathedral is open to the public every day, and Mass is held several times a week.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="malecon-puerto.jpg" >
+            <h2>The Malecón</h2>
+            <p style="margin-bottom: -5%;"><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Attraction_Review-g150793-d2440853-Reviews-Malecon_Boardwalk-Puerto_Vallarta.html">
+              The Malecón is the iconic boardwalk that runs along Puerto Vallarta’s waterfront. 
+              Whether you’re looking for a place to relax or party, the Malecón has it all!</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="marina-puerto.jpg" >
+            <h2>The Marina</h2>
+            <p style="margin-bottom: -5%;"><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Attraction_Review-g150793-d152496-Reviews-Marina_Vallarta-Puerto_Vallarta.html">
+              The Marina is a great place to go for a walk, take in the sights, and enjoy some fresh seafood 
+              that making it the perfect place to spend an evening out on the town.</p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="muertos-puerto.jpg" >
+            <h2>Playa de los Muertos</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Attraction_Review-g150793-d153514-Reviews-Playa_de_los_Muertos-Puerto_Vallarta.html">
+              The popular spot for snorkeling, swimming, and surfing.
+              One of the most fun things to do in Puerto Vallarta without a doubt! </p></a>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="romantica-puerto.webp" >
+            <h2>The Zona Romántica</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com.my/Attraction_Review-g150793-d152509-Reviews-Zona_Romantica-Puerto_Vallarta.html">
+              This lively area is home to dozens of restaurants, bars, and nightclubs, 
+              making it the perfect place to party the night away.</p></a>
+          </div>
+        </div>
+      </div>
+      </div>
+<!-------------------------------------------------------------------------------------------------------------Playa Del Carmen--------------------->
+
+    <div class="container">
+
+      <div class="Playa Del Carmen">
+      <p class="header">Famous Places to visit in Playa Del Carmen</p>
+      
+      <div class="content">
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="5th avenue-playa.jpg" >
+            <h2>Parque Los Fundadores</h2>
+            <p style="margin-bottom: -5%;"><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.ca/Attraction_Review-g150812-d8046438-Reviews-Parque_Los_Fundadores-Playa_del_Carmen_Yucatan_Peninsula.html">
+              At the beach front of the park is a new bronze  sculpture placed there in late 2011. It is entitled “Portal Maya 2012”. 
+              You can walk around this statue and see it up close.</p>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="cenetos-playa.jpg" >
+            <h2>Cenote Chaak Tun</h2>
+            <p style="margin-bottom: -5%;"><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Attraction_Review-g150812-d2296462-Reviews-Cenote_Chaak_Tun-Playa_del_Carmen_Yucatan_Peninsula.html">
+              This beautiful, natural environment is an underground paradise of crystal-clear water and prehistoric
+              rock formations that look absolutely otherworldly when bathed in the beam of natural sunlight that trickles in from above.</p>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="mamitas-playa.jpg" >
+            <h2>Mamitas Beach Club</h2>
+            <p style="margin-bottom: -5%;"><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Attraction_Review-g150812-d2687680-Reviews-Mamita_s_Beach_Club-Playa_del_Carmen_Yucatan_Peninsula.html">
+              Playa del Carmen has some beautiful beaches, being right on the Caribbean Sea, so if you want to
+              maximize your time it may be worth investing an afternoon in a beach club likes Mamitas Beach Club.</p>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="mayan-playa.jpg" >
+            <h2>Mayan Ruins, Coba</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com.my/Attractions-g150812-Activities-c47-t2-Playa_del_Carmen_Yucatan_Peninsula.html">
+              Coba is one of the only sites remaining in <br>
+              Mexico where you can still climb the temple stairways.</p>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="rooftop pools-playa.jpg" >
+            <h2>The Fives Rooftop</h2>
+            <p><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Restaurant_Review-g150812-d13991549-Reviews-Fives_Rooftop-Playa_del_Carmen_Yucatan_Peninsula.html">
+              You don't have to be a guest to visit - you can simply buy a day pass. The pool day passes work 
+              similarly to the beach clubs in that they guarantee admission, a chair, and a credit for food.</p>
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <div class="box vintage">
+            <img src="rio-playa.jpg" >
+            <h2>Rio Secreto</h2>
+            <p style="margin-bottom: -5%;"><a style="text-decoration: none; color: white; cursor: pointer;" href="https://www.tripadvisor.com/Attraction_Review-g150812-d1075137-Reviews-Rio_Secreto-Playa_del_Carmen_Yucatan_Peninsula.html">
+              A spectacular underground fantasy world that is straight out of a Sci-Fi film. 
+              Don a wetsuit and prepare yourself to be awed by one of the most impressive underground cave systems in the world.</p></a>
+          </div>
+        </div>
+      </div>
+      </div>
+<!------------------------------------------------------------------------------------------------------------------------Footer-------------------->
+
+      <div class="footer-basic">
+        <footer>
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+              <li><p>This website will make sure you have all the information before planning your travel</p>        
+              </li>
+            </ul>
+            <p class="copyright">BCS2111019 DCS4A © 2023</p>
+        </footer>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
